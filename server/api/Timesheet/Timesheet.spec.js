@@ -3,7 +3,7 @@
 var should = require('should');
 var app = require('../../app');
 var request = require('supertest');
-var Timesheet = require('./timesheet.model');
+var Timesheet = require('./Timesheet.model.js');
 var User = require('../user/user.model');
 //var fakeUser = require('../user/user.model.spec');
 
@@ -81,7 +81,7 @@ describe('Timesheets model', function() {
     });
   });
 
-  it('should fail when saving a timesheet without a user', function(done) {
+  it('should fail when saving a Timesheet without a user', function(done) {
     var timesheet = new Timesheet(timesheetBase);
     // Must use closure here to safely set reference to undefined (See TypedArray.js, which sets the global 'undefined'
     (function(undefined) {
@@ -93,7 +93,7 @@ describe('Timesheets model', function() {
     });
   });
 
-  it('should fail when saving a timesheet without a supervisor', function(done) {
+  it('should fail when saving a Timesheet without a supervisor', function(done) {
     var timesheet = new Timesheet(timesheetBase);
     // Must use closure here to safely set reference to undefined (See TypedArray.js, which sets the global 'undefined'
     (function(undefined) {
@@ -105,7 +105,7 @@ describe('Timesheets model', function() {
     });
   });
 
-  it('should fail when saving a timesheet which has been approved but has not been submitted', function(done) {
+  it('should fail when saving a Timesheet which has been approved but has not been submitted', function(done) {
     var timesheet = new Timesheet(timesheetBase);
     timesheet.approved = true;
     timesheet.submitted = false;
@@ -115,7 +115,7 @@ describe('Timesheets model', function() {
     });
   });
 
-  it('should fail when saving a timesheet with a startDate later than the endDate', function(done) {
+  it('should fail when saving a Timesheet with a startDate later than the endDate', function(done) {
     var timesheet = new Timesheet(timesheetBase);
     timesheet.startDate = new Date(timesheet.endDate.getTime() + 1);
     timesheet.save(function(err) {
@@ -124,7 +124,7 @@ describe('Timesheets model', function() {
     });
   });
 
-  it('should succeed when saving a valid timesheet', function(done) {
+  it('should succeed when saving a valid Timesheet', function(done) {
     var timesheet = new Timesheet(timesheetBase);
     timesheet._user = regularUser._id;
     timesheet._supervisor = supervisor._id;

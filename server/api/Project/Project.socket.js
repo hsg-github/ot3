@@ -4,21 +4,21 @@
 
 'use strict';
 
-var TimesheetEntry = require('./TimesheetEntry.model');
+var Contract = require('./Project.model.js');
 
 exports.register = function(socket) {
-  TimesheetEntry.schema.post('save', function (doc) {
+  Contract.schema.post('save', function (doc) {
     onSave(socket, doc);
   });
-  TimesheetEntry.schema.post('remove', function (doc) {
+  Contract.schema.post('remove', function (doc) {
     onRemove(socket, doc);
   });
 }
 
 function onSave(socket, doc, cb) {
-  socket.emit('TimesheetEntry:save', doc);
+  socket.emit('Project:save', doc);
 }
 
 function onRemove(socket, doc, cb) {
-  socket.emit('TimesheetEntry:remove', doc);
+  socket.emit('Project:remove', doc);
 }

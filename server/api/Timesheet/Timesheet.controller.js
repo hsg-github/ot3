@@ -11,7 +11,7 @@ exports.index = function(req, res) {
   });
 };
 
-// Get a single timesheet
+// Get a single Timesheet
 exports.show = function(req, res) {
   Timesheet.findById(req.params.id, function (err, timesheet) {
     if(err) { return handleError(res, err); }
@@ -20,7 +20,7 @@ exports.show = function(req, res) {
   });
 };
 
-// Creates a new timesheet in the DB.
+// Creates a new Timesheet in the DB.
 exports.create = function(req, res) {
   Timesheet.create(req.body, function(err, timesheet) {
     if(err) { return handleError(res, err); }
@@ -28,7 +28,7 @@ exports.create = function(req, res) {
   });
 };
 
-// Updates an existing timesheet in the DB.
+// Updates an existing Timesheet in the DB.
 exports.update = function(req, res) {
   if(req.body._id) { delete req.body._id; }
   Timesheet.findById(req.params.id, function (err, timesheet) {
@@ -42,7 +42,7 @@ exports.update = function(req, res) {
   });
 };
 
-// Deletes a timesheet from the DB.
+// Deletes a Timesheet from the DB.
 exports.destroy = function(req, res) {
   Timesheet.findById(req.params.id, function (err, timesheet) {
     if(err) { return handleError(res, err); }

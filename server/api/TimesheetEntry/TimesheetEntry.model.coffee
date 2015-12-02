@@ -10,7 +10,7 @@ var TimesheetEntrySchema = new BaseSchema({
   notes: String,
   dateWorked: Date,
   _timesheet: {type: Schema.Types.ObjectId, ref: 'Timesheet'},
-  _taskOrder: {type: Schema.Types.ObjectId, ref: 'TaskOrder'}
+  _task: {type: Schema.Types.ObjectId, ref: 'Task'}
 });
 
 module.exports = mongoose.model('TimesheetEntry', TimesheetEntrySchema);

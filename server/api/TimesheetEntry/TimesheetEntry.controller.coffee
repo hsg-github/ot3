@@ -1,7 +1,7 @@
 'use strict';
 
 var _ = require('lodash');
-var TimesheetEntry = require('./TimesheetEntry.model');
+var TimesheetEntry = require('./TimesheetEntry.model.coffee');
 
 // Get list of TimesheetEntrys
 exports.index = function(req, res) {

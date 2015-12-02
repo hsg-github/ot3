@@ -3,11 +3,11 @@
 var should = require('should');
 var app = require('../../app');
 var request = require('supertest');
-var Contract = require('./contract.model');
+var Contract = require('./Project.model.js');
 
 var contractBase = new Contract({
-  name: 'a contract',
-  description: 'a contract description',
+  name: 'a Project',
+  description: 'a Project description',
   startDate: new Date(2015, 11, 1, 0, 0, 0, 0),
   endDate: new Date(2015, 11, 15, 0, 0, 0, 0)
 });
@@ -45,7 +45,7 @@ describe('Contract model', function() {
     });
   });
 
-  it('should fail when saving a contract without a name', function(done) {
+  it('should fail when saving a Project without a name', function(done) {
     var contract = new Contract(contractBase);
     (function(undefined) {
       contract.name = undefined;
@@ -56,7 +56,7 @@ describe('Contract model', function() {
     });
   });
 
-  it('should fail when saving a contract without a description', function(done) {
+  it('should fail when saving a Project without a description', function(done) {
     var contract = new Contract(contractBase);
     (function(undefined) {
       contract.description = undefined;
@@ -67,7 +67,7 @@ describe('Contract model', function() {
     });
   });
 
-  it('should succeed when saving a valid contract', function(done) {
+  it('should succeed when saving a valid Project', function(done) {
     var contract = new Contract(contractBase);
     contract.save(function(err) {
       should.not.exist(err);

@@ -1,7 +1,7 @@
 'use strict';
 
 var _ = require('lodash');
-var Contract = require('./contract.model');
+var Contract = require('./Project.model.js');
 
 // Get list of contracts
 exports.index = function(req, res) {
@@ -11,7 +11,7 @@ exports.index = function(req, res) {
   });
 };
 
-// Get a single contract
+// Get a single Project
 exports.show = function(req, res) {
   Contract.findById(req.params.id, function (err, contract) {
     if(err) { return handleError(res, err); }
@@ -20,7 +20,7 @@ exports.show = function(req, res) {
   });
 };
 
-// Creates a new contract in the DB.
+// Creates a new Project in the DB.
 exports.create = function(req, res) {
   Contract.create(req.body, function(err, contract) {
     if(err) { return handleError(res, err); }
@@ -28,7 +28,7 @@ exports.create = function(req, res) {
   });
 };
 
-// Updates an existing contract in the DB.
+// Updates an existing Project in the DB.
 exports.update = function(req, res) {
   if(req.body._id) { delete req.body._id; }
   Contract.findById(req.params.id, function (err, contract) {
@@ -42,7 +42,7 @@ exports.update = function(req, res) {
   });
 };
 
-// Deletes a contract from the DB.
+// Deletes a Project from the DB.
 exports.destroy = function(req, res) {
   Contract.findById(req.params.id, function (err, contract) {
     if(err) { return handleError(res, err); }

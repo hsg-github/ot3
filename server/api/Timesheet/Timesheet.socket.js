@@ -4,7 +4,7 @@
 
 'use strict';
 
-var Timesheet = require('./timesheet.model');
+var Timesheet = require('./Timesheet.model.js');
 
 exports.register = function(socket) {
   Timesheet.schema.post('save', function (doc) {
@@ -16,9 +16,9 @@ exports.register = function(socket) {
 }
 
 function onSave(socket, doc, cb) {
-  socket.emit('timesheet:save', doc);
+  socket.emit('Timesheet:save', doc);
 }
 
 function onRemove(socket, doc, cb) {
-  socket.emit('timesheet:remove', doc);
+  socket.emit('Timesheet:remove', doc);
 }

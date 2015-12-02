@@ -4,21 +4,21 @@
 
 'use strict';
 
-var Contract = require('./contract.model');
+var Task = require('./Task.model.coffee');
 
 exports.register = function(socket) {
-  Contract.schema.post('save', function (doc) {
+  Task.schema.post('save', function (doc) {
     onSave(socket, doc);
   });
-  Contract.schema.post('remove', function (doc) {
+  Task.schema.post('remove', function (doc) {
     onRemove(socket, doc);
   });
 }
 
 function onSave(socket, doc, cb) {
-  socket.emit('contract:save', doc);
+  socket.emit('Task:save', doc);
 }
 
 function onRemove(socket, doc, cb) {
-  socket.emit('contract:remove', doc);
+  socket.emit('Task:remove', doc);
 }
