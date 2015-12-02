@@ -7,7 +7,7 @@
 
 var Thing = require('../api/thing/thing.model');
 var User = require('../api/user/user.model');
-var Timesheet = require('../api/timesheet/timesheet.model');
+var Timesheet = require('./timesheet.model');
 
 Thing.find({}).remove(function() {
   Thing.create({

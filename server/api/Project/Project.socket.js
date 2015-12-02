@@ -4,16 +4,16 @@
 
 'use strict';
 
-var Contract = require('./Project.model.js');
+var Project = require('./Project.model.js');
 
 exports.register = function(socket) {
-  Contract.schema.post('save', function (doc) {
+  Project.schema.post('save', function (doc) {
     onSave(socket, doc);
   });
-  Contract.schema.post('remove', function (doc) {
+  Project.schema.post('remove', function (doc) {
     onRemove(socket, doc);
   });
-}
+};
 
 function onSave(socket, doc, cb) {
   socket.emit('Project:save', doc);

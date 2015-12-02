@@ -1,24 +1,18 @@
-/**
- * Broadcast updates to client when the model changes
- */
+###*
+# Broadcast updates to client when the model changes
+###
 
-'use strict';
+onSave = (socket, doc, cb) ->
+  socket.emit 'Task:save', doc
 
-var Task = require('./Task.model.coffee');
+onRemove = (socket, doc, cb) ->
+  socket.emit 'Task:remove', doc
 
-exports.register = function(socket) {
-  Task.schema.post('save', function (doc) {
-    onSave(socket, doc);
-  });
-  Task.schema.post('remove', function (doc) {
-    onRemove(socket, doc);
-  });
-}
+'use strict'
+Task = require('./Task.model.js')
 
-function onSave(socket, doc, cb) {
-  socket.emit('Task:save', doc);
-}
-
-function onRemove(socket, doc, cb) {
-  socket.emit('Task:remove', doc);
-}
+exports.register = (socket) ->
+  Task.schema.post 'save', (doc) ->
+    onSave socket, doc
+  Task.schema.post 'remove', (doc) ->
+    onRemove socket, doc

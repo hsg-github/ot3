@@ -69,7 +69,7 @@ module.exports = function (grunt) {
         tasks: ['injector:css']
       },
       mochaTest: {
-        files: ['server/**/*.spec.js'],
+        files: ['server/**/*.spec.js', 'server/**/*.spec.coffee'],
         tasks: ['env:test', 'mochaTest']
       },
       jsTest: {
@@ -115,9 +115,9 @@ module.exports = function (grunt) {
         files: [
           '{.tmp,<%= yeoman.client %>}/{app,components}/**/*.css',
           '{.tmp,<%= yeoman.client %>}/{app,components}/**/*.html',
-          
+
           '{.tmp,<%= yeoman.client %>}/{app,components}/**/*.js',
-          
+
           '!{.tmp,<%= yeoman.client %>}{app,components}/**/*.spec.js',
           '!{.tmp,<%= yeoman.client %>}/{app,components}/**/*.mock.js',
           '<%= yeoman.client %>/assets/images/{,*//*}*.{png,jpg,jpeg,gif,webp,svg}'
@@ -459,11 +459,16 @@ module.exports = function (grunt) {
       }
     },
 
+    // TODO: may need to ignore test-common.js for browser
     mochaTest: {
       options: {
-        reporter: 'spec'
+        reporter: 'spec',
+        require: [
+          'coffee-script/register',
+          'server/api/shared/test-common.js'
+        ]
       },
-      src: ['server/**/*.spec.js']
+      src: ['server/**/*.spec.js', 'server/**/*.spec.coffee']
     },
 
     protractor: {
@@ -564,12 +569,12 @@ module.exports = function (grunt) {
         files: {
           '<%= yeoman.client %>/index.html': [
                [
-                 
+
                  '{.tmp,<%= yeoman.client %>}/{app,components}/**/*.js',
-                 
-                 '!{.tmp,<%= yeoman.client %>}/app/app.js',               
+
+                 '!{.tmp,<%= yeoman.client %>}/app/app.js',
                  '!{.tmp,<%= yeoman.client %>}/{app,components}/**/*.spec.js',
-                 '!{.tmp,<%= yeoman.client %>}/{app,components}/**/*.mock.js'               
+                 '!{.tmp,<%= yeoman.client %>}/{app,components}/**/*.mock.js'
                ]
             ]
         }
@@ -639,7 +644,7 @@ module.exports = function (grunt) {
       return grunt.task.run([
         'clean:server',
         'env:all',
-        'injector:sass', 
+        'injector:sass',
         'concurrent:server',
         'injector',
         'wiredep',
@@ -651,7 +656,7 @@ module.exports = function (grunt) {
     grunt.task.run([
       'clean:server',
       'env:all',
-      'injector:sass', 
+      'injector:sass',
       'concurrent:server',
       'injector',
       'wiredep',
@@ -681,7 +686,7 @@ module.exports = function (grunt) {
       return grunt.task.run([
         'clean:server',
         'env:all',
-        'injector:sass', 
+        'injector:sass',
         'concurrent:test',
         'injector',
         'autoprefixer',
@@ -694,7 +699,7 @@ module.exports = function (grunt) {
         'clean:server',
         'env:all',
         'env:test',
-        'injector:sass', 
+        'injector:sass',
         'concurrent:test',
         'injector',
         'wiredep',
@@ -712,7 +717,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('build', [
     'clean:dist',
-    'injector:sass', 
+    'injector:sass',
     'concurrent:dist',
     'injector',
     'wiredep',

@@ -1,59 +1,50 @@
-'use strict';
+'use strict'
+_ = require('lodash')
+TimesheetEntry = require('./TimesheetEntry.model.coffee')
 
-var _ = require('lodash');
-var TimesheetEntry = require('./TimesheetEntry.model.coffee');
+handleError = (res, err) ->
+  res.status(500).send err
 
-// Get list of TimesheetEntrys
-exports.index = function(req, res) {
-  TimesheetEntry.find(function (err, TimesheetEntrys) {
-    if(err) { return handleError(res, err); }
-    return res.status(200).json(TimesheetEntrys);
-  });
-};
+# Get list of TimesheetEntrys
 
-// Get a single TimesheetEntry
-exports.show = function(req, res) {
-  TimesheetEntry.findById(req.params.id, function (err, TimesheetEntry) {
-    if(err) { return handleError(res, err); }
-    if(!TimesheetEntry) { return res.status(404).send('Not Found'); }
-    return res.json(TimesheetEntry);
-  });
-};
+exports.index = (req, res) ->
+  TimesheetEntry.find (err, timesheetEntries) ->
+    return handleError(res, err) if err
+    res.status(200).json timesheetEntries
 
-// Creates a new TimesheetEntry in the DB.
-exports.create = function(req, res) {
-  TimesheetEntry.create(req.body, function(err, TimesheetEntry) {
-    if(err) { return handleError(res, err); }
-    return res.status(201).json(TimesheetEntry);
-  });
-};
+# Get a single TimesheetEntry
 
-// Updates an existing TimesheetEntry in the DB.
-exports.update = function(req, res) {
-  if(req.body._id) { delete req.body._id; }
-  TimesheetEntry.findById(req.params.id, function (err, TimesheetEntry) {
-    if (err) { return handleError(res, err); }
-    if(!TimesheetEntry) { return res.status(404).send('Not Found'); }
-    var updated = _.merge(TimesheetEntry, req.body);
-    updated.save(function (err) {
-      if (err) { return handleError(res, err); }
-      return res.status(200).json(TimesheetEntry);
-    });
-  });
-};
+exports.show = (req, res) ->
+  TimesheetEntry.findById req.params.id, (err, timesheetEntry) ->
+    return handleError(res, err) if err
+    return res.status(404).send('Not Found') if !timesheetEntry
+    res.json timesheetEntry
 
-// Deletes a TimesheetEntry from the DB.
-exports.destroy = function(req, res) {
-  TimesheetEntry.findById(req.params.id, function (err, TimesheetEntry) {
-    if(err) { return handleError(res, err); }
-    if(!TimesheetEntry) { return res.status(404).send('Not Found'); }
-    TimesheetEntry.remove(function(err) {
-      if(err) { return handleError(res, err); }
-      return res.status(204).send('No Content');
-    });
-  });
-};
+# Creates a new TimesheetEntry in the DB.
 
-function handleError(res, err) {
-  return res.status(500).send(err);
-}
+exports.create = (req, res) ->
+  TimesheetEntry.create req.body, (err, timesheetEntry) ->
+    return handleError(res, err) if err
+    res.status(201).json timesheetEntry
+
+# Updates an existing TimesheetEntry in the DB.
+
+exports.update = (req, res) ->
+  delete req.body._id if req.body._id
+  TimesheetEntry.findById req.params.id, (err, timesheetEntry) ->
+    return handleError(res, err) if err
+    return res.status(404).send('Not Found') if !timesheetEntry
+    updated = _.merge(timesheetEntry, req.body)
+    updated.save (err) ->
+      return handleError(res, err) if err
+      res.status(200).json timesheetEntry
+
+# Deletes a TimesheetEntry from the DB.
+
+exports.destroy = (req, res) ->
+  TimesheetEntry.findById req.params.id, (err, timesheetEntry) ->
+    return handleError(res, err) if err
+    return res.status(404).send('Not Found') if !timesheetEntry
+    timesheetEntry.remove (err) ->
+      return handleError(res, err) if err
+      res.status(204).send 'No Content'

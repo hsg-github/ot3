@@ -1,34 +1,31 @@
 'use strict';
 
-var should = require('should');
-var app = require('../../app');
-var request = require('supertest');
-var Contract = require('./Project.model.js');
+var Project = require('./Project.model.js');
 
-var contractBase = new Contract({
-  name: 'a Project',
-  description: 'a Project description',
+var projectBase = new Project({
+  name: 'Project Test',
+  description: 'The Project under test',
   startDate: new Date(2015, 11, 1, 0, 0, 0, 0),
   endDate: new Date(2015, 11, 15, 0, 0, 0, 0)
 });
 
-describe('Contract model', function() {
+describe('Project model', function() {
 
   before(function(done) {
     // Clear objects before testing
-    Contract.remove().exec().then(function() {
+    Project.remove().exec().then(function() {
       done();
     });
   });
 
   afterEach(function(done) {
-    Contract.remove().exec().then(function() {
+    Project.remove().exec().then(function() {
       done();
     });
   });
 
   it('should begin with no objects', function(done) {
-    Contract.find({}, function(err, objects) {
+    Project.find({}, function(err, objects) {
       objects.should.have.length(0);
       done();
     });
@@ -36,40 +33,40 @@ describe('Contract model', function() {
 
   // Test inherited params
   it('should not allow a caller to manually set lastUpdatedAt', function(done) {
-    var contract = new Contract(contractBase);
-    contract.lastUpdatedAt = new Date(0);
-    contract.save(function(err, savedContract) {
+    var project = new Project(projectBase);
+    project.lastUpdatedAt = new Date(0);
+    project.save(function(err, savedProject) {
       should.not.exist(err);
-      savedContract.lastUpdatedAt.should.not.equal(new Date(0));
+      savedProject.lastUpdatedAt.should.not.equal(new Date(0));
       done();
     });
   });
 
   it('should fail when saving a Project without a name', function(done) {
-    var contract = new Contract(contractBase);
+    var project = new Project(projectBase);
     (function(undefined) {
-      contract.name = undefined;
+      project.name = undefined;
     })();
-    contract.save(function(err) {
+    project.save(function(err) {
       should.exist(err.errors.name);
       done();
     });
   });
 
   it('should fail when saving a Project without a description', function(done) {
-    var contract = new Contract(contractBase);
+    var project = new Project(projectBase);
     (function(undefined) {
-      contract.description = undefined;
+      project.description = undefined;
     })();
-    contract.save(function(err) {
+    project.save(function(err) {
       should.exist(err.errors.description);
       done();
     });
   });
 
   it('should succeed when saving a valid Project', function(done) {
-    var contract = new Contract(contractBase);
-    contract.save(function(err) {
+    var project = new Project(projectBase);
+    project.save(function(err) {
       should.not.exist(err);
       done();
     });

@@ -26,8 +26,8 @@ mongoose.connection.on('error', function(err) {
 //  if (err) console.log('thing error: ' + err);
 //});
 
-var Timesheet = require('./api/timesheet/timesheet.model')
-console.log('saving timesheet')
+var Timesheet = require('./api/Timesheet/Timesheet.model.js')
+console.log('saving Timesheet')
 Timesheet.create({
   submitted: false,
   startDate: new Date(),
@@ -35,5 +35,5 @@ Timesheet.create({
   extraArg: 'asd',
   createdAt: new Date()
 }, function(err, timesheet) {
-  if (err) console.log('timesheet error: ' + err);
+  if (err) console.log('Timesheet error: ' + err);
 });

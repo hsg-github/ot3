@@ -18,10 +18,10 @@ function onConnect(socket) {
   });
 
   // Insert sockets below
-  require('../api/TimesheetEntry/TimesheetEntry.socket').register(socket);
-  require('../api/TaskOrder/TaskOrder.socket').register(socket);
-  require('../api/contract/contract.socket').register(socket);
-  require('../api/timesheet/timesheet.socket').register(socket);
+  require('../api/TimesheetEntry/TimesheetEntry.socket.coffee').register(socket);
+  require('../api/Task/Task.socket.coffee').register(socket);
+  require('../api/Project/Project.socket.js').register(socket);
+  require('./timesheet.socket').register(socket);
   require('../api/thing/thing.socket').register(socket);
 }
 

@@ -1,53 +1,53 @@
 'use strict';
 
 var _ = require('lodash');
-var Contract = require('./Project.model.js');
+var Project = require('./Project.model.js');
 
-// Get list of contracts
+// Get list of projects
 exports.index = function(req, res) {
-  Contract.find(function (err, contracts) {
+  Project.find(function (err, projects) {
     if(err) { return handleError(res, err); }
-    return res.status(200).json(contracts);
+    return res.status(200).json(projects);
   });
 };
 
 // Get a single Project
 exports.show = function(req, res) {
-  Contract.findById(req.params.id, function (err, contract) {
+  Project.findById(req.params.id, function (err, project) {
     if(err) { return handleError(res, err); }
-    if(!contract) { return res.status(404).send('Not Found'); }
-    return res.json(contract);
+    if(!project) { return res.status(404).send('Not Found'); }
+    return res.json(project);
   });
 };
 
 // Creates a new Project in the DB.
 exports.create = function(req, res) {
-  Contract.create(req.body, function(err, contract) {
+  Project.create(req.body, function(err, project) {
     if(err) { return handleError(res, err); }
-    return res.status(201).json(contract);
+    return res.status(201).json(project);
   });
 };
 
 // Updates an existing Project in the DB.
 exports.update = function(req, res) {
   if(req.body._id) { delete req.body._id; }
-  Contract.findById(req.params.id, function (err, contract) {
+  Project.findById(req.params.id, function (err, project) {
     if (err) { return handleError(res, err); }
-    if(!contract) { return res.status(404).send('Not Found'); }
-    var updated = _.merge(contract, req.body);
+    if(!project) { return res.status(404).send('Not Found'); }
+    var updated = _.merge(project, req.body);
     updated.save(function (err) {
       if (err) { return handleError(res, err); }
-      return res.status(200).json(contract);
+      return res.status(200).json(project);
     });
   });
 };
 
 // Deletes a Project from the DB.
 exports.destroy = function(req, res) {
-  Contract.findById(req.params.id, function (err, contract) {
+  Project.findById(req.params.id, function (err, project) {
     if(err) { return handleError(res, err); }
-    if(!contract) { return res.status(404).send('Not Found'); }
-    contract.remove(function(err) {
+    if(!project) { return res.status(404).send('Not Found'); }
+    project.remove(function(err) {
       if(err) { return handleError(res, err); }
       return res.status(204).send('No Content');
     });

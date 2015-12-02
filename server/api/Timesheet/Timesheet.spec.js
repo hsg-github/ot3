@@ -1,8 +1,5 @@
 'use strict';
 
-var should = require('should');
-var app = require('../../app');
-var request = require('supertest');
 var Timesheet = require('./Timesheet.model.js');
 var User = require('../user/user.model');
 //var fakeUser = require('../user/user.model.spec');

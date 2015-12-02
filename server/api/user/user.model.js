@@ -10,8 +10,8 @@ var UserSchema = new BaseSchema({
   firstName: String,
   lastName: String,
   email: { type: String, lowercase: true },
-  allowedTaskOrders: [{ type: Schema.Types.ObjectId, ref: 'TaskOrder' }],
-  mostRecentTaskOrders: [{ type: Schema.Types.ObjectId, ref: 'TaskOrder' }],
+  allowedTasks: [{ type: Schema.Types.ObjectId, ref: 'Task' }],
+  mostRecentTasks: [{ type: Schema.Types.ObjectId, ref: 'Task' }],
   role: {
     type: String,
     default: 'user'

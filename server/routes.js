@@ -11,9 +11,9 @@ module.exports = function(app) {
 
   // Insert routes below
   app.use('/api/timesheet-entries', require('./api/TimesheetEntry'));
-  app.use('/api/task-orders', require('./api/TaskOrder'));
-  app.use('/api/contracts', require('./api/contract'));
-  app.use('/api/timesheets', require('./api/timesheet'));
+  app.use('/api/tasks', require('./api/Task'));
+  app.use('/api/projects', require('./api/Project'));
+  app.use('/api/timesheets', require('./api/Timesheet'));
   app.use('/api/things', require('./api/thing'));
   app.use('/api/users', require('./api/user'));
 

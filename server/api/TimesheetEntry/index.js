@@ -1,7 +1,7 @@
 'use strict';
 
 var express = require('express');
-var controller = require('./TimesheetEntry.controller');
+var controller = require('./TimesheetEntry.controller.coffee');
 
 var router = express.Router();
 
