@@ -3,7 +3,7 @@
 User = require('../user/user.model')
 Project = require('../Project/Project.model')
 Task = require('../Task/Task.model.coffee')
-Timesheet = require('../Timesheet/Timesheet.model')
+Timesheet = require('../Timesheet/Timesheet.model.coffee')
 TimesheetEntry = require('../TimesheetEntry/TimesheetEntry.model.coffee')
 
 regularUser = new User(
@@ -117,36 +117,3 @@ describe 'TimesheetEntry model', ->
       should.exist err.errors.dateWorked
       done()
     )
-
-#    findAllUsers().should.eventually.have.length(2).notify(done)
-#    deferred = Q.defer();
-##    console.log(ball)
-#    User
-#      .find({})
-#      .exec((err, objects) ->
-##        console.log(user) for user in objects
-#        objects.should.eventually.have.length 2
-#        deferred.resolve()
-##      fulfilledPromise(objects).should.eventually.have.length(2).notify(done)
-##        done()
-#    )
-
-#findAllUsers = () =>
-#  deferred = Q.defer()
-#  User
-#  .find({})
-#  .exec((err, objects) ->
-#    deferred.resolve(objects)
-#  )
-#  return deferred.promise
-#
-#saveObject = (object) =>
-#  deferred = Q.defer()
-#  object.save (err, saved) ->
-#    deferred.reject(err) if err
-#    deferred.resolve(saved)
-#  deferred.promise
-#    User.find {}, (err, objects) ->
-#      objects.should.have.length 1
-#      console.log('user: ' + objects[1])
-#      done()

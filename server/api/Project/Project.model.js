@@ -2,7 +2,7 @@
 
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-var TimeWindowedSchema = require('../shared/TimeWindowedSchema.model');
+var TimeWindowedSchema = require('../shared/TimeWindowedSchema.model.coffee');
 
 var ProjectSchema = new TimeWindowedSchema({
   name: {type: String, required: true},

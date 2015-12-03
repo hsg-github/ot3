@@ -93,11 +93,13 @@ describe 'Task model', ->
     task = new Task(taskBase)
     task._project = project._id
     task._manager = manager._id
-    task.save (err, savedTask) ->
+    task.save ((err, savedTask) ->
       should.not.exist err
       # Also make sure we can populate() a model reference
-      Task.findById(savedTask._id).populate('_project').populate('_manager').exec (err, populatedTask) ->
+      Task.findById(savedTask._id).populate('_project').populate('_manager').exec ((err, populatedTask) ->
         if err
           return done(err)
         populatedTask._project.name.should.equal project.name
         populatedTask._manager.firstName.should.equal manager.firstName
+      )
+    )

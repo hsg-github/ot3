@@ -5,11 +5,14 @@ var mongoose = require('mongoose');
 var chai = require("chai");
 var chaiAsPromised = require("chai-as-promised");
 should = chai.should();
+expect = chai.expect;
 chai.use(chaiAsPromised);
+//chai.config.includeStack = true;
 
-var Promise = require("bluebird");
-//require('mongoose').Promise = Promise;
-mongoose.Promise = global.Promise
+var Bluebird = require("bluebird");
+require('mongoose').Promise = Bluebird;
+Bluebird.onPossiblyUnhandledRejection(function(){});
+//mongoose.Promise = global.Promise;
 
 //global.chaiAsPromised = chaiAsPromised;
 //global.expect = chai.expect;
@@ -22,11 +25,11 @@ mongoose.Promise = global.Promise
 //global.defer = Q.defer;
 //global.waitAll = Q.all;
 
-User = require('../user/user.model')
-Project = require('../Project/Project.model')
-Task = require('../Task/Task.model.coffee')
-Timesheet = require('../Timesheet/Timesheet.model')
-TimesheetEntry = require('../TimesheetEntry/TimesheetEntry.model.coffee')
+User = require('../user/user.model');
+Project = require('../Project/Project.model');
+Task = require('../Task/Task.model.coffee');
+Timesheet = require('../Timesheet/Timesheet.model.coffee');
+TimesheetEntry = require('../TimesheetEntry/TimesheetEntry.model.coffee');
 
 removeAll = function() {
   User.remove().exec();
@@ -34,6 +37,6 @@ removeAll = function() {
   Timesheet.remove().exec();
   Task.remove().exec();
   TimesheetEntry.remove().exec();
-}
+};
 
 

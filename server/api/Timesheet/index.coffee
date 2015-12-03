@@ -1,9 +1,9 @@
 'use strict';
 
-var express = require('express');
-var controller = require('./Timesheet.controller.js');
+express = require('express');
+controller = require('./Timesheet.controller');
 
-var router = express.Router();
+router = express.Router();
 
 router.get('/', controller.index);
 router.get('/:id', controller.show);

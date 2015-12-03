@@ -1,6 +1,6 @@
 'use strict'
 _ = require('lodash')
-TimesheetEntry = require('./TimesheetEntry.model.coffee')
+TimesheetEntry = require('./TimesheetEntry.model')
 
 handleError = (res, err) ->
   res.status(500).send err

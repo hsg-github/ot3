@@ -459,13 +459,13 @@ module.exports = function (grunt) {
       }
     },
 
-    // TODO: may need to ignore test-common.js for browser
+    // TODO: may need to ignore common.spec.js for browser
     mochaTest: {
       options: {
         reporter: 'spec',
         require: [
           'coffee-script/register',
-          'server/api/shared/test-common.js'
+          'server/api/shared/common.spec.js'
         ]
       },
       src: ['server/**/*.spec.js', 'server/**/*.spec.coffee']

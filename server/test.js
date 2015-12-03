@@ -26,7 +26,7 @@ mongoose.connection.on('error', function(err) {
 //  if (err) console.log('thing error: ' + err);
 //});
 
-var Timesheet = require('./api/Timesheet/Timesheet.model.js')
+var Timesheet = require('./api/Timesheet/Timesheet.model.coffee')
 console.log('saving Timesheet')
 Timesheet.create({
   submitted: false,

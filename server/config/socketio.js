@@ -18,10 +18,11 @@ function onConnect(socket) {
   });
 
   // Insert sockets below
-  require('../api/TimesheetEntry/TimesheetEntry.socket.coffee').register(socket);
-  require('../api/Task/Task.socket.coffee').register(socket);
-  require('../api/Project/Project.socket.js').register(socket);
-  require('./timesheet.socket').register(socket);
+  require('coffee-script/register');
+  require('../api/TimesheetEntry/TimesheetEntry.socket').register(socket);
+  require('../api/Task/Task.socket').register(socket);
+  require('../api/Project/Project.socket').register(socket);
+  require('../api/Timesheet/Timesheet.socket.coffee').register(socket);
   require('../api/thing/thing.socket').register(socket);
 }
 

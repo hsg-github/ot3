@@ -9,7 +9,7 @@ onRemove = (socket, doc, cb) ->
   socket.emit 'Task:remove', doc
 
 'use strict'
-Task = require('./Task.model.js')
+Task = require('./Task.model')
 
 exports.register = (socket) ->
   Task.schema.post 'save', (doc) ->

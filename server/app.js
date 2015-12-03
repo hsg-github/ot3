@@ -7,6 +7,7 @@
 // Set default node environment to development
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
+require('coffee-script/register');
 var express = require('express');
 var mongoose = require('mongoose');
 var config = require('./config/environment');
@@ -19,6 +20,8 @@ mongoose.connection.on('error', function(err) {
 	}
 );
 // Populate DB with sample data
+Promise = require("bluebird");
+mongoose.Promise = Promise;
 if(config.seedDB) { require('./config/seed'); }
 
 // Setup server
