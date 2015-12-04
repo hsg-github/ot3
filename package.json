@@ -21,6 +21,7 @@
     "jsonwebtoken": "^5.0.0",
     "kerberos": "0.0.17",
     "lodash": "~2.4.1",
+    "loglevel": "^1.4.0",
     "method-override": "~1.0.0",
     "mongoose": "^4.2.9",
     "morgan": "~1.0.0",
